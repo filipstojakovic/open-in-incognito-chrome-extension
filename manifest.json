@@ -1,0 +1,25 @@
+{
+	"manifest_version": 3,
+	"name": "Open In Incognito",
+	"version": "1.0",
+	"description": "Open In Incognito",
+	"icons": {
+		"48": "icon.jpg"
+	},
+	"commands": {
+		"openInIncognitoCommand": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+K"
+			},
+			"description": "Open current tab in incognito"
+		}
+	},
+	"permissions": [
+		"contextMenus",
+		"tabs",
+		"commands"
+	],
+	"background": {
+		"service_worker": "background.js"
+	}
+}
