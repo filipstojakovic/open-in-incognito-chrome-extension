@@ -7,6 +7,9 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 function openInIncognito(url) {
+	 if (url === null || !url.startsWith('www') && !url.startsWith('http')) {
+		url = 'https://www.duckduckgo.com';
+	}
 	chrome.windows.create({ url, incognito: true, state: 'maximized' });
 }
 
@@ -21,9 +24,6 @@ function openCurrentTabInIncognito() {
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		const tab = tabs[0];
 		let url = tab.url;
-		if (url == null) {
-			url = "www.duckduckgo.com";
-		}
 		openInIncognito(url);
 	});
 }
