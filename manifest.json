@@ -6,6 +6,13 @@
 	"icons": {
 		"48": "icon.jpg"
 	},
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["content.js"],
+			"run_at": "document_start"
+		}
+	],
 	"commands": {
 		"openInIncognitoCommand": {
 			"suggested_key": {
@@ -14,11 +21,7 @@
 			"description": "Open current tab in incognito"
 		}
 	},
-	"permissions": [
-		"contextMenus",
-		"tabs",
-		"commands"
-	],
+	"permissions": ["contextMenus", "tabs", "commands", "activeTab"],
 	"background": {
 		"service_worker": "background.js"
 	}

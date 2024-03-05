@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 function openInIncognito(url) {
-	 if (url === null || !url.startsWith('www') && !url.startsWith('http')) {
+	if (url === null || (!url.startsWith('www') && !url.startsWith('http'))) {
 		url = 'https://www.duckduckgo.com';
 	}
 	chrome.windows.create({ url, incognito: true, state: 'maximized' });
@@ -30,7 +30,14 @@ function openCurrentTabInIncognito() {
 
 // Add a listener for the keyboard shortcut
 chrome.commands.onCommand.addListener(function (command) {
-	if (command === "openInIncognitoCommand") {
+	if (command === 'openInIncognitoCommand') {
 		openCurrentTabInIncognito();
+	}
+});
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+	if (request.action === 'openIncognito') {
+		openInIncognito(request.url);
+		// chrome.windows.create({ url: request.url, incognito: true });
 	}
 });
